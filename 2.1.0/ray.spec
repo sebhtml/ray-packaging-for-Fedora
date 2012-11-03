@@ -79,8 +79,10 @@ computers using the message-passing interface (MPI) standard.
 %setup -q -n Ray-v%{version}
 
 %build
+CXXFLAGS="%{optflags} -D MAXKMERLENGTH=32 -D HAVE_LIBZ -D HAVE_LIBBZ2 -D RAY_VERSION=\\\\\\\"2.1.0\\\\\\\" -D RAYPLATFORM_VERSION=\\\\\\\"1.1.0\\\\\\\" -I . -I ../RayPlatform"
+
 %{_openmpi_load}
-make HAVE_LIBZ=y HAVE_LIBBZ2=y 
+make CXXFLAGS="$CXXFLAGS" HAVE_LIBBZ2=y HAVE_LIBZ=y
 cp Ray Ray$MPI_SUFFIX
 help2man --no-info -n "assemble genomes in parallel using the message-passing interface" %{_builddir}/Ray-v%{version}/Ray > Ray.1.man
 
@@ -92,7 +94,7 @@ make clean
 %{_openmpi_unload}
 
 %{_mpich2_load}
-make HAVE_LIBZ=y HAVE_LIBBZ2=y 
+make CXXFLAGS="$CXXFLAGS" HAVE_LIBBZ2=y HAVE_LIBZ=y
 cp Ray Ray$MPI_SUFFIX
 make clean
 %{_mpich2_unload}
@@ -157,3 +159,4 @@ rm -rf %{buildroot}
 - Removed useless '/' after buildroot
 - Fixed the packaging of Documentation
 - Removed symbols that are not U.S. American English from man page
+- Added Fedora compilation flags (optflags)
