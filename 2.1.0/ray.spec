@@ -1,6 +1,6 @@
 Name:           ray
 Version:        2.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Parallel genome assemblies for parallel DNA sequencing
 
 Group:          Applications/Engineering
@@ -21,6 +21,30 @@ Included:
  - Ray Méta de novo assembly of metagenomes
  - Ray Communities microbe abundance + taxonomic profiling
  - Ray Ontologies gene ontology profiling
+
+%package doc
+
+Summary:        Documentation files
+Group:          Documentation
+
+%description doc
+Ray is a parallel software that computes de novo genome assemblies with   
+next-generation sequencing data.
+Ray is written in C++ and can run in parallel on numerous interconnected 
+computers using the message-passing interface (MPI) standard.
+
+%package extra
+
+Summary:        Scripts and XSL sheets for post-processing
+Group:          Applications/Engineering
+
+Requires:       python, R
+
+%description extra
+Ray is a parallel software that computes de novo genome assemblies with   
+next-generation sequencing data.
+Ray is written in C++ and can run in parallel on numerous interconnected 
+computers using the message-passing interface (MPI) standard.
 
 %prep
 %setup -q -n Ray-v%{version}
@@ -58,40 +82,18 @@ rm -rf %{buildroot}
 %{_bindir}/Ray
 %{_mandir}/man1/Ray.1*
 
-%package doc
-
-Summary:        Documentation files
-Group:          Documentation
-
-#Requires:      
-
-%description doc
-Ray is a parallel software that computes de novo genome assemblies with   
-next-generation sequencing data.
-Ray is written in C++ and can run in parallel on numerous interconnected 
-computers using the message-passing interface (MPI) standard.
-
 %files doc
 %{_defaultdocdir}/ray/Documentation/*
 %{_defaultdocdir}/ray/RayPlatform/Documentation/*
-
-%package extra
-
-Summary:        Scripts and XSL sheets for post-processing
-Group:          Applications/Engineering
-
-Requires:       python, R
-
-%description extra
-Ray is a parallel software that computes de novo genome assemblies with   
-next-generation sequencing data.
-Ray is written in C++ and can run in parallel on numerous interconnected 
-computers using the message-passing interface (MPI) standard.
 
 %files extra
 %{_datadir}/ray/scripts/*
 
 %changelog
+* Fri Nov 3 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-2
+- The Spec file was reviewed by Jussi Lehtola.
+- Moved subpackage declarations to the top.
+
 * Fri Nov 2 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
 - This is the initial Ray package for Fedora
 
