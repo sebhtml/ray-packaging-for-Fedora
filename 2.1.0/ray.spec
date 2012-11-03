@@ -103,8 +103,8 @@ make clean
 rm -rf %{buildroot}
 
 # ray
-mkdir -p %{buildroot}/%{_mandir}/man1
-install -m 0644 Ray.1 %{buildroot}/%{_mandir}/man1/Ray.1
+mkdir -p %{buildroot}%{_mandir}/man1
+install -m 0644 Ray.1 %{buildroot}%{_mandir}/man1/Ray.1
 
 # ray openmpi
 %{_openmpi_load}
@@ -119,15 +119,15 @@ install -m 0755 Ray$MPI_SUFFIX %{buildroot}$MPI_BIN
 %{_mpich2_unload}
 
 # doc (ray-doc)
-mkdir -p %{buildroot}/%{_defaultdocdir}/ray/Documentation
-mkdir -p %{buildroot}/%{_defaultdocdir}/ray/RayPlatform/Documentation
-install -m 0644 Documentation/* %{buildroot}/%{_defaultdocdir}/ray/Documentation
-install -m 0644 RayPlatform/Documentation/* %{buildroot}/%{_defaultdocdir}/ray/RayPlatform/Documentation
+mkdir -p %{buildroot}%{_defaultdocdir}/ray/Documentation
+mkdir -p %{buildroot}%{_defaultdocdir}/ray/RayPlatform/Documentation
+install -m 0644 Documentation/* %{buildroot}%{_defaultdocdir}/ray/Documentation
+install -m 0644 RayPlatform/Documentation/* %{buildroot}%{_defaultdocdir}/ray/RayPlatform/Documentation
 
 # extra (ray-extra)
-mkdir -p %{buildroot}/%{_datadir}/ray
-cp -r scripts %{buildroot}/%{_datadir}/ray
-chmod 0755 %{buildroot}/%{_datadir}/ray/scripts
+mkdir -p %{buildroot}%{_datadir}/ray
+cp -r scripts %{buildroot}%{_datadir}/ray
+chmod 0755 %{buildroot}%{_datadir}/ray/scripts
 
 %clean
 rm -rf %{buildroot}
@@ -154,6 +154,7 @@ rm -rf %{buildroot}
 - The Spec file was reviewed by Jussi Lehtola
 - Moved subpackage declarations to the top
 - Added subpackages common, openmpi, mpich2
+- Removed useless '/' after %{buildroot}
 
 * Fri Nov 2 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
 - This is the initial Ray package for Fedora
