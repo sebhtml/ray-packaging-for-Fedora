@@ -1,6 +1,6 @@
 Name:           ray
 Version:        2.1.0
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        Parallel genome assemblies for parallel DNA sequencing
 
 Group:          Applications/Engineering
@@ -82,7 +82,12 @@ computers using the message-passing interface (MPI) standard.
 %{_openmpi_load}
 make HAVE_LIBZ=y HAVE_LIBBZ2=y 
 cp Ray Ray$MPI_SUFFIX
-help2man --no-info -n "assemble genomes in parallel using the message-passing interface" %{_builddir}/Ray-v%{version}/Ray > Ray.1
+help2man --no-info -n "assemble genomes in parallel using the message-passing interface" %{_builddir}/Ray-v%{version}/Ray > Ray.1.man
+
+#remove symbols that are not in U.S. American English 
+cat Ray.1.man|sed 's/Erdős.*Rényi/Erdos-Renyi/g' | sed 's/é/e/g' | sed 's/É/E/g' | sed 's/ç/c/g' |sed 's/ő/o/g' > Ray.1
+
+#rm Ray.1.man
 make clean
 %{_openmpi_unload}
 
@@ -143,13 +148,12 @@ rm -rf %{buildroot}
 %{_datadir}/ray/scripts/*
 
 %changelog
-* Fri Nov 3 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-2
+* Fri Nov 3 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
+
+- This is the initial Ray package for Fedora
 - The Spec file was reviewed by Jussi Lehtola
 - Moved subpackage declarations to the top
 - Added subpackages common, openmpi, mpich2
 - Removed useless '/' after buildroot
 - Fixed the packaging of Documentation
-
-* Fri Nov 2 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
-- This is the initial Ray package for Fedora
-
+- Removed symbols that are not U.S. American English from man page
