@@ -22,7 +22,6 @@ Included:
  - Ray Ontologies gene ontology profiling
 
 %package common
-
 Summary:        Parallel genome assemblies for parallel DNA sequencing
 Group:          Applications/Engineering
 
@@ -33,7 +32,6 @@ Ray is written in C++ and can run in parallel on numerous interconnected
 computers using the message-passing interface (MPI) standard.
 
 %package openmpi
-
 Summary:        Ray package for Open-MPI
 Group:          Applications/Engineering
 Requires:       openmpi, ray-common
@@ -45,7 +43,6 @@ Ray is written in C++ and can run in parallel on numerous interconnected
 computers using the message-passing interface (MPI) standard.
 
 %package mpich2
-
 Summary:        Ray package for MPICH2
 Group:          Applications/Engineering
 Requires:       mpich2, ray-common
@@ -56,10 +53,7 @@ next-generation sequencing data.
 Ray is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
 
-
-
 %package doc
-
 Summary:        Documentation files
 Group:          Documentation
 Requires:       ray-common
@@ -71,7 +65,6 @@ Ray is written in C++ and can run in parallel on numerous interconnected
 computers using the message-passing interface (MPI) standard.
 
 %package extra
-
 Summary:        Scripts and XSL sheets for post-processing
 Group:          Applications/Engineering
 Requires:       python, R, ray-common
@@ -102,27 +95,27 @@ make clean
 %install
 rm -rf %{buildroot}
 
-# ray
+# ray-common
 mkdir -p %{buildroot}%{_mandir}/man1
 install -m 0644 Ray.1 %{buildroot}%{_mandir}/man1/Ray.1
 
-# ray openmpi
+# ray-openmpi
 %{_openmpi_load}
 mkdir -p %{buildroot}$MPI_BIN
 install -m 0755 Ray$MPI_SUFFIX %{buildroot}$MPI_BIN
 %{_openmpi_unload}
 
-# ray mpich2
+# ray-mpich2
 %{_mpich2_load}
 mkdir -p %{buildroot}$MPI_BIN
 install -m 0755 Ray$MPI_SUFFIX %{buildroot}$MPI_BIN
 %{_mpich2_unload}
 
-# doc (ray-doc)
+# ray-doc
 mkdir doc
 cp -ar RayPlatform/Documentation/ doc/RayPlatform
 
-# extra (ray-extra)
+# ray-extra
 mkdir -p %{buildroot}%{_datadir}/ray
 cp -r scripts %{buildroot}%{_datadir}/ray
 chmod 0755 %{buildroot}%{_datadir}/ray/scripts
@@ -152,7 +145,7 @@ rm -rf %{buildroot}
 - The Spec file was reviewed by Jussi Lehtola
 - Moved subpackage declarations to the top
 - Added subpackages common, openmpi, mpich2
-- Removed useless '/' after %{buildroot}
+- Removed useless '/' after buildroot
 - Fixed the packaging of Documentation
 
 * Fri Nov 2 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
