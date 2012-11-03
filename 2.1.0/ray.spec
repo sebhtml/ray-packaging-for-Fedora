@@ -114,6 +114,8 @@ install -m 0755 Ray$MPI_SUFFIX %{buildroot}$MPI_BIN
 # ray-doc
 mkdir doc
 cp -ar RayPlatform/Documentation/ doc/RayPlatform
+chmod 644 doc/RayPlatform/*
+chmod 644 Documentation/*
 
 # ray-extra
 mkdir -p %{buildroot}%{_datadir}/ray
