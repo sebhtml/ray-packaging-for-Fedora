@@ -9,7 +9,7 @@ URL:            http://denovoassembler.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/denovoassembler/Ray-v%{version}.tar.bz2
 
 BuildRequires:  openmpi-devel, bzip2-devel, zlib-devel
-Requires:       openmpi, zlib, bzip2-libs
+Requires:       openmpi
 
 %description
 Ray is a parallel software that computes de novo genome assemblies with   
@@ -26,7 +26,7 @@ Included:
 %setup -q -n Ray-v%{version}
 
 %build
-make HAVE_LIBZ=y HAVE_LIBBZ2=y
+make HAVE_LIBZ=y HAVE_LIBBZ2=y 
 module load mpi/openmpi-x86_64
 help2man --no-info -n "assemble genomes in parallel using the message-passing interface" %{_builddir}/Ray-v%{version}/Ray > Ray.1
 
@@ -42,8 +42,8 @@ install -m 0644 Ray.1 %{buildroot}/%{_mandir}/man1/Ray.1
 # doc (ray-doc)
 mkdir -p %{buildroot}/%{_defaultdocdir}/ray/Documentation
 mkdir -p %{buildroot}/%{_defaultdocdir}/ray/RayPlatform/Documentation
-install -m 0755 Documentation/* %{buildroot}/%{_defaultdocdir}/ray/Documentation
-install -m 0755 RayPlatform/Documentation/* %{buildroot}/%{_defaultdocdir}/ray/RayPlatform/Documentation
+install -m 0644 Documentation/* %{buildroot}/%{_defaultdocdir}/ray/Documentation
+install -m 0644 RayPlatform/Documentation/* %{buildroot}/%{_defaultdocdir}/ray/RayPlatform/Documentation
 
 # extra (ray-extra)
 mkdir -p %{buildroot}/%{_datadir}/ray
