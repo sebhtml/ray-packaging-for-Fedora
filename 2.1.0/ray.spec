@@ -119,10 +119,8 @@ install -m 0755 Ray$MPI_SUFFIX %{buildroot}$MPI_BIN
 %{_mpich2_unload}
 
 # doc (ray-doc)
-mkdir -p %{buildroot}%{_defaultdocdir}/ray/Documentation
-mkdir -p %{buildroot}%{_defaultdocdir}/ray/RayPlatform/Documentation
-install -m 0644 Documentation/* %{buildroot}%{_defaultdocdir}/ray/Documentation
-install -m 0644 RayPlatform/Documentation/* %{buildroot}%{_defaultdocdir}/ray/RayPlatform/Documentation
+mkdir doc
+cp -ar RayPlatform/Documentation/ doc/RayPlatform
 
 # extra (ray-extra)
 mkdir -p %{buildroot}%{_datadir}/ray
@@ -143,8 +141,8 @@ rm -rf %{buildroot}
 %{_libdir}/mpich2/bin/Ray*
 
 %files doc
-%{_defaultdocdir}/ray/Documentation/*
-%{_defaultdocdir}/ray/RayPlatform/Documentation/*
+%doc Documentation/*
+%doc doc/RayPlatform/
 
 %files extra
 %{_datadir}/ray/scripts/*
@@ -155,6 +153,7 @@ rm -rf %{buildroot}
 - Moved subpackage declarations to the top
 - Added subpackages common, openmpi, mpich2
 - Removed useless '/' after %{buildroot}
+- Fixed the packaging of Documentation
 
 * Fri Nov 2 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
 - This is the initial Ray package for Fedora
