@@ -156,7 +156,7 @@ rm -rf %{buildroot}
 %doc doc/RayPlatform/
 
 %files extra
-%{_datadir}/ray/scripts/*
+%{_datadir}/ray/
 
 %changelog
 * Fri Nov 3 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
@@ -171,4 +171,5 @@ rm -rf %{buildroot}
 - The Spec file was (informally) reviewed a second time by Jussi Lehtola
 - CXXFLAGS was shortened
 - Replacement of non-ASCII symbols is more compact with sed
+- ray-extra now ships _datadir/ray/ instead of _datadir/ray/scripts/.
 - This is the initial Ray package for Fedora
