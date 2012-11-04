@@ -1,6 +1,6 @@
 Name:           ray
 Version:        2.1.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Parallel genome assemblies for parallel DNA sequencing
 
 Group:          Applications/Engineering
@@ -88,10 +88,14 @@ CXXFLAGS+="-D RAYPLATFORM_VERSION=\\\\\\\"1.1.0\\\\\\\" -I . -I ../RayPlatform"
 make CXXFLAGS="$CXXFLAGS" HAVE_LIBBZ2=y HAVE_LIBZ=y
 cp Ray Ray$MPI_SUFFIX
 
+pwd
+
 # generate the man page with Ray --help
-help2man --no-info \
+# rsh agent is not available in chroot (mock) !
+export OMPI_MCA_orte_rsh_agent=/bin/false
+help2man --no-info --help-option=--help -o Ray.1.man \
   -n "assemble genomes in parallel using the message-passing interface" \
-  %{_builddir}/Ray-v%{version}/Ray > Ray.1.man
+  ./Ray
 
 # remove symbols that are not in U.S. American English 
 sed 's/Erdős.*Rényi/Erdos-Renyi/g;s/é/e/g;s/É/E/g;s/ç/c/g;s/ő/o/g' \
@@ -163,6 +167,7 @@ rm -rf %{buildroot}
 
 * Fri Nov 4 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-2
 - Added build dependency help2man 
+- Added OMPI_MCA_orte_rsh_agent to pass mock builds
 
 * Fri Nov 3 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
 
