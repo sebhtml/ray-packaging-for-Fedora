@@ -9,6 +9,7 @@ URL:            http://denovoassembler.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/denovoassembler/Ray-v%{version}.tar.bz2
 
 BuildRequires:  openmpi-devel, bzip2-devel, zlib-devel, mpich2-devel
+BuildRequires:  help2man
 
 %description
 Ray is a parallel software that computes de novo genome assemblies with   
@@ -159,6 +160,10 @@ rm -rf %{buildroot}
 %{_datadir}/ray/
 
 %changelog
+
+* Fri Nov 4 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-2
+- Added build dependency help2man 
+
 * Fri Nov 3 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
 
 - The Spec file was (informally) reviewed by Jussi Lehtola
