@@ -102,6 +102,9 @@ sed 's/Erdős.*Rényi/Erdos-Renyi/g;s/é/e/g;s/É/E/g;s/ç/c/g;s/ő/o/g' \
   %{name}.1.man > %{name}.1
 
 rm %{name}.1.man
+cp README.md README
+cp %{name}Platform/README README.%{name}Platform
+cp %{name}Platform/AUTHORS AUTHORS.%{name}Platform
 
 make clean
 %{_openmpi_unload}
@@ -147,7 +150,9 @@ rm -rf %{buildroot}
 
 %files common
 %doc MANUAL_PAGE.txt gpl-3.0.txt LICENSE.txt 
-%doc %{name}Platform/lgpl-3.0.txt README.md
+%doc %{name}Platform/lgpl-3.0.txt
+%doc AUTHORS AUTHORS.%{name}Platform
+%doc README README.%{name}Platform
 %{_mandir}/man1/%{name}.1*
 
 %files openmpi
@@ -166,7 +171,9 @@ rm -rf %{buildroot}
 %changelog
 
 * Fri Nov 5 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-3
-- changed the package name from ray to Ray
+- Changed the package name from ray to Ray
+- Renamed README.md to README
+- Added AUTHORS, README.RayPlatform, AUTHORS.RayPlatform
 
 * Fri Nov 4 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-2
 - Added build dependency help2man 
