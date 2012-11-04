@@ -170,7 +170,7 @@ rm -rf %{buildroot}
 
 %changelog
 
-* Fri Nov 5 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-3
+* Fri Nov 4 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-3
 - Changed the package name from ray to Ray
 - Renamed README.md to README
 - Added AUTHORS, README.RayPlatform, AUTHORS.RayPlatform
