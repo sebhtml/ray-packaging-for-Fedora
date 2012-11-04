@@ -79,7 +79,9 @@ computers using the message-passing interface (MPI) standard.
 %setup -q -n Ray-v%{version}
 
 %build
-CXXFLAGS="%{optflags} -D MAXKMERLENGTH=32 -D HAVE_LIBZ -D HAVE_LIBBZ2 -D RAY_VERSION=\\\\\\\"2.1.0\\\\\\\" -D RAYPLATFORM_VERSION=\\\\\\\"1.1.0\\\\\\\" -I . -I ../RayPlatform"
+CXXFLAGS="%{optflags} -D MAXKMERLENGTH=32 -D HAVE_LIBZ -D HAVE_LIBBZ2 -D "
+CXXFLAGS+="RAY_VERSION=\\\\\\\"2.1.0\\\\\\\" "
+CXXFLAGS+="-D RAYPLATFORM_VERSION=\\\\\\\"1.1.0\\\\\\\" -I . -I ../RayPlatform"
 
 %{_openmpi_load}
 make CXXFLAGS="$CXXFLAGS" HAVE_LIBBZ2=y HAVE_LIBZ=y
@@ -153,10 +155,12 @@ rm -rf %{buildroot}
 * Fri Nov 3 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
 
 - This is the initial Ray package for Fedora
-- The Spec file was reviewed by Jussi Lehtola
+- The Spec file was (informally) reviewed by Jussi Lehtola
 - Moved subpackage declarations to the top
 - Added subpackages common, openmpi, mpich2
 - Removed useless '/' after buildroot
 - Fixed the packaging of Documentation
 - Removed symbols that are not U.S. American English from man page
 - Added Fedora compilation flags (optflags)
+- The Spec file was (informally) reviewed a second time by Jussi Lehtola
+- CXXFLAGS was shortened
