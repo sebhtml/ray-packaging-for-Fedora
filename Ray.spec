@@ -32,7 +32,7 @@ Group:          Applications/Engineering
 next-generation sequencing data.
 %{name} is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
-This subpackage contains common files for Ray.
+This sub-package contains common files for Ray.
 
 %package openmpi
 Summary:        %{name} package for Open-MPI
@@ -44,7 +44,7 @@ Requires:       openmpi, %{name}-common
 next-generation sequencing data.
 %{name} is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
-This subpackage enables parallel computation using openmpi.
+This sub-package enables parallel computation using openmpi.
 
 %package mpich2
 Summary:        %{name} package for MPICH2
@@ -56,7 +56,7 @@ Requires:       mpich2, %{name}-common
 next-generation sequencing data.
 %{name} is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
-This subpackage enables parallel computation using mpich2.
+This sub-package enables parallel computation using mpich2.
 
 %package doc
 Summary:        Documentation files
@@ -68,7 +68,7 @@ Requires:       %{name}-common
 next-generation sequencing data.
 %{name} is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
-This subpackage includes documentation files.
+This sub-package includes documentation files.
 
 %package extra
 Summary:        Scripts and XSL sheets for post-processing
@@ -80,7 +80,7 @@ Requires:       python, R, %{name}-common
 next-generation sequencing data.
 %{name} is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
-This subpackage contains scripts and XSL sheets for post-processing.
+This sub-package contains scripts and XSL sheets for post-processing.
 
 %prep
 %setup -q -n %{name}-v%{version}
@@ -94,7 +94,7 @@ CXXFLAGS+="-D RAYPLATFORM_VERSION=\\\\\\\"1.1.0\\\\\\\" -I . -I ../%{name}Platfo
 make CXXFLAGS="$CXXFLAGS" HAVE_LIBBZ2=y HAVE_LIBZ=y
 cp %{name} %{name}$MPI_SUFFIX
 
-# generate the man page with %{name} --help
+# generate the man page with Ray --help
 # rsh agent is not available in chroot (mock) !
 # --locale en_US.UTF-8 \
 export OMPI_MCA_orte_rsh_agent=/bin/false
@@ -118,29 +118,29 @@ make clean
 %install
 rm -rf %{buildroot}
 
-# %{name}-common
+# Ray-common
 mkdir -p %{buildroot}%{_mandir}/man1
 install -m 0644 %{name}.1 %{buildroot}%{_mandir}/man1/%{name}.1
 
-# %{name}-openmpi
+# Ray-openmpi
 %{_openmpi_load}
 mkdir -p %{buildroot}$MPI_BIN
 install -m 0755 %{name}$MPI_SUFFIX %{buildroot}$MPI_BIN
 %{_openmpi_unload}
 
-# %{name}-mpich2
+# Ray-mpich2
 %{_mpich2_load}
 mkdir -p %{buildroot}$MPI_BIN
 install -m 0755 %{name}$MPI_SUFFIX %{buildroot}$MPI_BIN
 %{_mpich2_unload}
 
-# %{name}-doc
+# Ray-doc
 mkdir doc
 cp -ar %{name}Platform/Documentation/ doc/%{name}Platform
 chmod 644 doc/%{name}Platform/*
 chmod 644 Documentation/*
 
-# %{name}-extra
+# Ray-extra
 mkdir -p %{buildroot}%{_datadir}/%{name}
 cp -r scripts %{buildroot}%{_datadir}/%{name}
 chmod 0755 %{buildroot}%{_datadir}/%{name}/scripts
@@ -186,8 +186,8 @@ rm -rf %{buildroot}
 * Fri Nov 3 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-1
 
 - The Spec file was (informally) reviewed by Jussi Lehtola
-- Moved subpackage declarations to the top
-- Added subpackages common, openmpi, mpich2
+- Moved sub-package declarations to the top
+- Added sub-packages common, openmpi, mpich2
 - Removed useless '/' after buildroot
 - Fixed the packaging of Documentation
 - Removed symbols that are not U.S. American English from man page
