@@ -32,6 +32,7 @@ Group:          Applications/Engineering
 next-generation sequencing data.
 %{name} is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
+This subpackage contains common files for Ray.
 
 %package openmpi
 Summary:        %{name} package for Open-MPI
@@ -43,6 +44,7 @@ Requires:       openmpi, %{name}-common
 next-generation sequencing data.
 %{name} is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
+This subpackage enables parallel computation using openmpi.
 
 %package mpich2
 Summary:        %{name} package for MPICH2
@@ -54,6 +56,7 @@ Requires:       mpich2, %{name}-common
 next-generation sequencing data.
 %{name} is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
+This subpackage enables parallel computation using mpich2.
 
 %package doc
 Summary:        Documentation files
@@ -65,6 +68,7 @@ Requires:       %{name}-common
 next-generation sequencing data.
 %{name} is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
+This subpackage includes documentation files.
 
 %package extra
 Summary:        Scripts and XSL sheets for post-processing
@@ -76,6 +80,7 @@ Requires:       python, R, %{name}-common
 next-generation sequencing data.
 %{name} is written in C++ and can run in parallel on numerous interconnected 
 computers using the message-passing interface (MPI) standard.
+This subpackage contains scripts and XSL sheets for post-processing.
 
 %prep
 %setup -q -n %{name}-v%{version}
@@ -167,6 +172,7 @@ rm -rf %{buildroot}
 
 * Fri Nov 5 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-4
 - The man page encoding is en_US.UTF-8
+- Added more specific descriptions
 
 * Fri Nov 4 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-3
 - Changed the package name from ray to Ray
