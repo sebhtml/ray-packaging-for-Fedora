@@ -1,16 +1,15 @@
 Name:           Ray
 Version:        2.1.0
-Release:        4%{?dist}
+Release:        5%{?dist}
 Summary:        Parallel genome assemblies for parallel DNA sequencing
 
 Group:          Applications/Engineering
 License:        GPLv3
 URL:            http://denovoassembler.sourceforge.net/
 Source0:        http://downloads.sourceforge.net/denovoassembler/%{name}-v%{version}.tar.bz2
+Patch0:         Ray.manpage.patch
 
 BuildRequires:  openmpi-devel, bzip2-devel, zlib-devel, mpich2-devel
-BuildRequires:  help2man
-BuildRequires:  perl-gettext
 
 %description
 %{name} is a parallel software that computes de novo genome assemblies with   
@@ -84,6 +83,7 @@ This sub-package contains scripts and XSL sheets for post-processing.
 
 %prep
 %setup -q -n %{name}-v%{version}
+%patch0
 
 %build
 CXXFLAGS="%{optflags} -D MAXKMERLENGTH=32 -D HAVE_LIBZ -D HAVE_LIBBZ2 -D "
@@ -93,14 +93,6 @@ CXXFLAGS+="-D RAYPLATFORM_VERSION=\\\\\\\"1.1.0\\\\\\\" -I . -I ../%{name}Platfo
 %{_openmpi_load}
 make CXXFLAGS="$CXXFLAGS" HAVE_LIBBZ2=y HAVE_LIBZ=y
 cp %{name} %{name}$MPI_SUFFIX
-
-# generate the man page with Ray --help
-# rsh agent is not available in chroot (mock) !
-# --locale en_US.UTF-8 \
-export OMPI_MCA_orte_rsh_agent=/bin/false
-help2man --no-info --help-option=--help -o %{name}.1 \
-  -n "assemble genomes in parallel using the message-passing interface" \
-  ./%{name}
 
 cp README.md README
 cp %{name}Platform/README README.%{name}Platform
@@ -169,6 +161,9 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}/
 
 %changelog
+
+* Fri Nov 29 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-5
+- Added a patch for the man page
 
 * Fri Nov 5 2012 Sébastien Boisvert <sebastien.boisvert.3@ulaval.ca> - 2.1.0-4
 - The man page encoding is en_US.UTF-8
